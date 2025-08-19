@@ -1,8 +1,9 @@
 import Sidebar from "@/components/layout/Sidebar";
 import Hedear from "@/components/layout/Header";
+import PageBreadCrumb from "./components/PageBreadCrumb";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="flex min-h-screen min-w-screen">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-w-[1280px]`}>
+        <div className="flex min-h-screen min-w-full">
           <Sidebar />
           <div className="flex flex-col flex-auto">
             <Hedear />
-            <div className="flex-auto bg-secondary p-7 rounded-2xl">{children}</div>
+            <div className="flex-auto bg-secondary px-7 py-5 rounded-2xl">
+              {/* <PageBreadCrumb /> */}
+              {children}
+            </div>
           </div>
         </div>
       </body>

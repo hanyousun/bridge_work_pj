@@ -5,19 +5,39 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Search, Layers, ClipboardList, ScrollText, LaptopMinimalCheck, UserCog } from "lucide-react";
+import { Search, Layers, ClipboardList, ScrollText, LaptopMinimalCheck, Settings } from "lucide-react";
 
 export default function Sidemenu() {
   const menuList = [
-    { title: "공통코드", list: ["공통코드메뉴01", "공통코드메뉴02", "공통코드메뉴03"], icon: Layers },
+    {
+      title: "공통관리",
+      list: [
+        { href: "/employees", label: "인력관리" },
+        { href: "/partners", label: "협력사관리" },
+        { href: "/schedule", label: "스케줄관리" },
+      ],
+      icon: Layers,
+    },
     {
       title: "프로그램관리",
-      list: ["프로그램관리01", "프로그램관리02", "프로그램관리03", "프로그램관리04"],
+      list: [
+        { href: "/employees", label: "프로그램관리01" },
+        { href: "/partners", label: "프로그램관리02" },
+        { href: "/schedule", label: "프로그램관리03" },
+      ],
       icon: ClipboardList,
     },
-    { title: "메뉴관리", list: ["메뉴관리01", "메뉴관리02", "메뉴관리03", "메뉴관리04"], icon: ScrollText },
+    {
+      title: "메뉴관리",
+      list: [
+        { href: "/employees", label: "프로그램관리01" },
+        { href: "/partners", label: "프로그램관리02" },
+        { href: "/schedule", label: "프로그램관리03" },
+      ],
+      icon: ScrollText,
+    },
     { title: "권한관리", list: [], icon: LaptopMinimalCheck },
-    { title: "사용자관리", list: [], icon: UserCog },
+    { title: "사용자관리", list: [], icon: Settings },
   ];
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
@@ -49,8 +69,8 @@ export default function Sidemenu() {
             {isOpen && item.list.length > 0 && (
               <ul className="text-sm px-9">
                 {item.list.map((listItem) => (
-                  <li key={listItem} className="py-1.5">
-                    <Link href="#">{listItem}</Link>
+                  <li key={listItem.label} className="py-1.5">
+                    <Link href={listItem.href}>{listItem.label}</Link>
                   </li>
                 ))}
               </ul>

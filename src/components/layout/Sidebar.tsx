@@ -1,23 +1,29 @@
 "use client";
-
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "../ui/button";
 import Sidemenu from "../layout/Sidemenu";
-import { ChevronLeft, House, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, House, Star } from "lucide-react";
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="flex">
-      <div className="flex flex-col gap-2 bg-sidebar-primary px-1 py-9">
+      <div className="flex flex-col gap-2 bg-sidebar-primary px-1.5 py-9">
         <Button
           size="sideIcon"
           onClick={() => {
             setIsOpen(!isOpen);
           }}>
-          <ChevronLeft color="background" className="size-8" strokeWidth={1.75} />
+          {isOpen ? (
+            <ChevronRight color="background" className="size-8" strokeWidth={1.75} />
+          ) : (
+            <ChevronLeft color="background" className="size-8" strokeWidth={1.75} />
+          )}
         </Button>
-        <Button size="sideIcon">
-          <House className="size-5" color="background" strokeWidth={1.75} />
+        <Button size="sideIcon" asChild>
+          <Link href="/" aria-label="홈">
+            <House className="size-5" color="background" strokeWidth={1.75} />
+          </Link>
         </Button>
         <Button size="sideIcon">
           <p>
