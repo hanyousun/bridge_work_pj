@@ -1,5 +1,6 @@
 // src/app/page.tsx
 import { Button } from "@/components/ui/button";
+import MonthCalender from "./components/main/MonthCalender";
 import MainTrendChart from "./components/main/MainTrandChart";
 import ProjectChart from "./components/main/ProjectChart";
 import ProductChart from "./components/main/ProductChart";
@@ -11,7 +12,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 export default function Home() {
   return (
     <main>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-[1fr_1fr_clamp(320px,29%,430px)] gap-4">
         <Card className="col-span-2 gap-2">
           <CardHeader>
             <CardTitle>연간 매입매출 추이</CardTitle>
@@ -44,11 +45,13 @@ export default function Home() {
             <FirstPurchaseChart />
           </CardContent>
         </Card>
-        <Card className="row-span-2">
+        <Card className="row-span-2 gap-0">
           <CardHeader>
             <CardTitle>월별일정</CardTitle>
           </CardHeader>
-          <CardContent>월별일정</CardContent>
+          <CardContent>
+            <MonthCalender />
+          </CardContent>
         </Card>
         <Card className="gap-0">
           <CardHeader>

@@ -7,6 +7,17 @@ import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 
+const colors = ["#ff940a", "#00a89d", "#ffcf11", "#3aa3e5"];
+
+type dataType = {
+  id: number;
+  date: string;
+  title: string;
+  color: string;
+};
+
+const calendarData: dataType[] = [{ id: 0, date: "2025-08-29", title: "개발", color: colors[0] }];
+
 function Calendar({
   className,
   classNames,
@@ -73,7 +84,7 @@ function Calendar({
         table: "w-full border-collapse",
         weekdays: cn("flex", defaultClassNames.weekdays),
         weekday: cn(
-          "text-muted-foreground rounded-md flex-1 font-normal text-[0.8rem] select-none",
+          "text-muted-foreground rounded-md flex-1 font-normal text-[0.8rem] select-none text-left px-3",
           defaultClassNames.weekday
         ),
         week: cn("flex w-full mt-2", defaultClassNames.week),
@@ -83,13 +94,10 @@ function Calendar({
           "relative w-full h-full p-0 text-center [&:first-child[data-selected=true]_button]:rounded-l-md [&:last-child[data-selected=true]_button]:rounded-r-md group/day aspect-square select-none",
           defaultClassNames.day
         ),
-        range_start: cn("rounded-l-md bg-input", defaultClassNames.range_start),
+        range_start: cn("rounded-l-md bg-accent", defaultClassNames.range_start),
         range_middle: cn("rounded-none", defaultClassNames.range_middle),
-        range_end: cn("rounded-r-md bg-input", defaultClassNames.range_end),
-        today: cn(
-          "bg-input text-accent-foreground rounded-md data-[selected=true]:rounded-none",
-          defaultClassNames.today
-        ),
+        range_end: cn("rounded-r-md bg-accent", defaultClassNames.range_end),
+        today: cn("border border-primary", defaultClassNames.today),
         outside: cn("text-muted-foreground aria-selected:text-muted-foreground", defaultClassNames.outside),
         disabled: cn("text-muted-foreground opacity-50", defaultClassNames.disabled),
         hidden: cn("invisible", defaultClassNames.hidden),
@@ -114,7 +122,7 @@ function Calendar({
         WeekNumber: ({ children, ...props }) => {
           return (
             <td {...props}>
-              <div className="flex size-(--cell-size) items-center justify-center text-center">{children}</div>
+              <div className="flex size-(--cell-size)">{children}</div>
             </td>
           );
         },
@@ -132,6 +140,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }: React.Compon
   React.useEffect(() => {
     if (modifiers.focused) ref.current?.focus();
   }, [modifiers.focused]);
+  const weekday = day.date.getDay();
 
   return (
     <Button
@@ -146,12 +155,35 @@ function CalendarDayButton({ className, day, modifiers, ...props }: React.Compon
       data-range-end={modifiers.range_end}
       data-range-middle={modifiers.range_middle}
       className={cn(
-        "data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[range-middle=true]:bg-input data-[range-middle=true]:text-accent-foreground data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground data-[range-end=true]:bg-primary data-[range-end=true]:text-primary-foreground group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 dark:hover:text-accent-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
+        "flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1",
+        "justify-start items-start",
+        weekday === 0 && "text-[#f06969] font-semibold", // 일
+        weekday === 6 && "text-[#309fb8] font-semibold", // 토
+        weekday > 0 && weekday < 6 && "text-[#818887]", // 평일
         defaultClassNames.day,
         className
       )}
-      {...props}
-    />
+      {...props}>
+      {calendarData.map((item) => (
+        <div className="px-2.5 w-full h-full" key={item.id}>
+          <p
+            className={cn(
+              "w-full pt-2 border-t-2 text-[18px] text-left",
+              weekday === 0 && "border-[#ff7272] font-semibold", // 일
+              weekday === 6 && "border-[#39abc4] font-semibold", // 토
+              weekday > 0 && weekday < 6 && "border-[#9ba4a3] font-semibold" // 평일
+            )}>
+            {props.children}
+          </p>
+          <div className="text-xs flex items-center pt-2.5 gap-1">
+            <span className="text-[8px]" style={{ color: item.color }}>
+              ●
+            </span>
+            {item.title}
+          </div>
+        </div>
+      ))}
+    </Button>
   );
 }
 

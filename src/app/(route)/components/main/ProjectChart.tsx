@@ -1,7 +1,7 @@
 "use client";
-
-import DonutChart, { ChartColor } from "@/components/widgets/DonutCharts"; // 네가 만든 컴포넌트
 import { useMemo } from "react";
+import { format } from "date-fns";
+import DonutChart, { ChartColor } from "@/components/widgets/DonutCharts"; // 네가 만든 컴포넌트
 
 type Slice = { name: string; value: number; color: string };
 
@@ -36,7 +36,9 @@ export default function ProjectChart() {
             {total}
             <span className="pl-1 text-xs font-normal text-accent">건</span>
           </div>
-          <div className="mt-2.5 px-3 py-0.5 text-xs text-white bg-ring rounded-full">2023년 5월</div>
+          <div className="mt-2.5 px-3 py-0.5 text-xs text-white bg-ring rounded-full">
+            {format(new Date(), "yyyy년 MM월")}
+          </div>
         </div>
       </div>
 
