@@ -1,8 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,14 +11,37 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export default function BreadcrumbWithCustomSeparator() {
-    const pathname = usePathname();
+function toTitleCase(s: string) {
+  try {
+    return decodeURIComponent(s)
+      .replace(/[-_]/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+  } catch {
+    return s;
+  }
+}
 
-      if (pathname === "/") return null;
-        const segments = pathname.split("/").filter(Boolean);
-  return (
-    <BreadcrumbItem key={href}>
-        {node}
+export default function BreadcrumbWithCustomSeparator() {
+  const pathname = usePathname();
+  if (!pathname || pathname === "/") return null;
+
+  // "/a/b/c" -> ["a","b","c"]
+  const segments = pathname.split("/").filter(Boolean);
+
+  // 누적 경로로 링크 만들기
+  const crumbs = segments.map((seg, idx) => {
+    const href = "/" + segments.slice(0, idx + 1).join("/");
+    const isLast = idx === segments.length - 1;
+
+    return (
+      <BreadcrumbItem key={href}>
+        {isLast ? (
+          <BreadcrumbPage>{toTitleCase(seg)}</BreadcrumbPage>
+        ) : (
+          <BreadcrumbLink asChild>
+            <Link href={href}>{toTitleCase(seg)}</Link>
+          </BreadcrumbLink>
+        )}
         {!isLast && <BreadcrumbSeparator />}
       </BreadcrumbItem>
     );
