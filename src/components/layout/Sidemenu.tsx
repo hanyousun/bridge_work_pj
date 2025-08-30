@@ -48,7 +48,7 @@ export default function Sidemenu() {
       </h1>
       <div className="relative">
         <Input className="pr-8" placeholder="Search Menu" />
-        <Button variant="transparent" size="icon" className="absolute top-0 right-0 size-9 px-5">
+        <Button variant="ghost" size="icon" className="absolute top-0 right-0 size-9 px-5">
           <Search strokeWidth={1.75} />
         </Button>
       </div>
@@ -58,7 +58,7 @@ export default function Sidemenu() {
         return (
           <div key={item.title}>
             <Button
-              variant="transparent"
+              variant="ghost"
               className={cn("flex justify-start w-full", isOpen && "text-primary font-bold")}
               onClick={() => setOpenIndex(!isOpen ? i : null)}
               aria-expanded={isOpen}
