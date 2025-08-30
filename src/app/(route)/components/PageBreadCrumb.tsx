@@ -15,21 +15,22 @@ function toTitleCase(s: string) {
   try {
     return decodeURIComponent(s)
       .replace(/[-_]/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+      .replace(/\b\w/g, (c: string) => c.toUpperCase()); // ← 타입 명시
   } catch {
     return s;
   }
 }
 
-export default function BreadcrumbWithCustomSeparator() {
+export default function PageBreadcrumb() {
   const pathname = usePathname();
   if (!pathname || pathname === "/") return null;
 
   // "/a/b/c" -> ["a","b","c"]
-  const segments = pathname.split("/").filter(Boolean);
+  const segments: string[] = pathname.split("/").filter(Boolean); // ← 타입 명시
 
   // 누적 경로로 링크 만들기
-  const crumbs = segments.map((seg, idx) => {
+  const crumbs = segments.map((seg: string, idx: number) => {
+    // ← 타입 명시
     const href = "/" + segments.slice(0, idx + 1).join("/");
     const isLast = idx === segments.length - 1;
 

@@ -6,17 +6,17 @@ import type { LegendPayload } from "recharts/types/component/DefaultLegendConten
 import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 
 export type LineSpec = {
-  dataKey: string; // 예: "sales"
-  name: string; // 예: "매출"
-  color: string; // 예: "var(--chart-3)"
+  dataKey: string;
+  name: string;
+  color: string;
 };
 
 type Props = {
-  data: any[]; // 간단하게 유지 (원하면 제네릭으로 바꿔도 됨)
-  xKey: string; // 예: "month"
-  lines: LineSpec[]; // 그릴 시리즈들
-  height?: number | string; // 기본 208
-  yTicks?: number[]; // 기본 [0,100,200,300,400,500]
+  data: Record<string, unknown>[];
+  xKey: string;
+  lines: LineSpec[];
+  height?: number | string;
+  yTicks?: number[];
 };
 
 export default function TrendChartBase({
