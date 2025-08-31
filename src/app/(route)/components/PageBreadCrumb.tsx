@@ -10,6 +10,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 
 function toTitleCase(s: string) {
   try {
@@ -49,16 +50,27 @@ export default function PageBreadcrumb() {
   });
 
   return (
-    <Breadcrumb>
-      <BreadcrumbList className="pb-4">
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/">Home</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        {crumbs}
-      </BreadcrumbList>
-    </Breadcrumb>
+    <div className="flex justify-between items-center pb-2">
+      <Breadcrumb>
+        <BreadcrumbList className="pb-1">
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          {crumbs}
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className="flex gap-1">
+        <Button size="sm" variant="secondary">
+          입력
+        </Button>
+        <Button size="sm" variant="secondary">
+          저장
+        </Button>
+        <Button size="sm">검색</Button>
+      </div>
+    </div>
   );
 }

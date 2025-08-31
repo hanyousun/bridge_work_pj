@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { LogIn, LogOut, Copy, Square, Rows2, Columns2, SquareX } from "lucide-react";
 
-export default function sidebar() {
+export default function Header() {
   return (
     <div className="flex justify-between items-center px-8 py-1">
       <p className="text-xs text-accent">Bridge Works 시스템에 오신걸 환영합니다</p>

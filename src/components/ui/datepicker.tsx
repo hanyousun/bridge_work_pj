@@ -29,18 +29,22 @@ function isValidDate(date: Date | undefined) {
   return !isNaN(date.getTime());
 }
 
-export default function Datepicker() {
+type DatepickerProps = {
+  className?: string;
+};
+
+export default function Datepicker({ className }: DatepickerProps) {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(new Date("2025-06-01"));
   const [month, setMonth] = React.useState<Date | undefined>(date);
   const [value, setValue] = React.useState(formatDate(date));
 
   return (
-    <div className="relative flex gap-2">
+    <div className={`relative flex gap-2 ${className ?? ""}`}>
       <Input
         id="date"
         value={value}
-        className="bg-background pr-10"
+        className="bg-background pr-10 px-2"
         onChange={(e) => {
           const date = new Date(e.target.value);
           setValue(e.target.value);
@@ -59,7 +63,7 @@ export default function Datepicker() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button id="date-picker" variant="ghost" className="absolute top-1/2 right-2 size-6 -translate-y-1/2">
-            <CalendarIcon className="size-3.5" />
+            <CalendarIcon className="size-3.5 text-primary" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto overflow-hidden p-0" align="end" alignOffset={-8} sideOffset={10}>
