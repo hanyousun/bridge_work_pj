@@ -14,6 +14,9 @@ type Row = {
   company: string;
   product: string;
 };
+
+type GridAreaProps = React.HTMLAttributes<HTMLDivElement>;
+
 const rows: Row[] = [
   {
     contractNo: "TBW_00000000151",
@@ -41,7 +44,7 @@ const rows: Row[] = [
   },
 ];
 
-export default function GridArea({ className }: { className?: string }) {
+export default function GridArea({ className }: GridAreaProps) {
   return (
     <div className={cn("rounded-md border overflow-auto", className)}>
       <Table>

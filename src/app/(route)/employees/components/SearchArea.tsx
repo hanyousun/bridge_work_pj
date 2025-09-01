@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Datepicker from "@/components/ui/datepicker";
 export default function SearchArea() {
   return (
-    <div className="border-[1px] border-primary px-8 py-5 bg-background rounded-xl shrink-0">
+    <div className="border-[1px] border-primary px-8 py-5 bg-background rounded-xl">
       <div className="grid grid-cols-3 grid-rows-2 gap-y-2 gap-x-12 justify-items-start items-center">
         <div className="flex items-center gap-2">
           <Label>고객사</Label>

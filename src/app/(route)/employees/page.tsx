@@ -1,11 +1,13 @@
+"use client";
+
 import SearchArea from "./components/SearchArea";
 import GridArea from "./components/GridArea";
 
-export default function employees() {
+export default function Employees() {
   return (
-    <div className="flex flex-col gap-3 flex-1 min-h-0">
+    <div className="flex flex-col gap-3 h-[calc(100%-38px)] ">
       <SearchArea />
-      <GridArea className="flex-1 min-h-0" />
+      <GridArea className="flex-auto" />
     </div>
   );
 }
