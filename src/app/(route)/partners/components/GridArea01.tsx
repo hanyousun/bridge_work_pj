@@ -28,7 +28,7 @@ const rows: Row[] = [
 
 export default function GridArea({ className }: GridAreaProps) {
   return (
-    <div className="flex flex-col gap-2  w-1/2">
+    <div className="flex flex-col gap-2 w-1/2">
       <h3 className="text-xl mt-4 font-bold">협력사 기본 정보</h3>
       {/* 타이틀이 없는 경우 밑에 부분만 필요 */}
       <div className={cn("rounded-md border overflow-auto", className)}>
